@@ -247,7 +247,7 @@ public class Main {
         for (int i=0;i<n-1;i++)
             method[i]=Math.abs(method[i]);
         last=method[0];
-        coeff=1/t;
+        coeff=1/n;
 
         for (int i=0;i<n-1;i++){
             index-=coeff*method[i];
@@ -255,7 +255,7 @@ public class Main {
                 down[i]=true;
             if(i>0)
                 index+=coeff*(last - method[i]);
-            coeff = (i+1)/(n*n);
+            coeff = (i+1)/n;
             last = method[i];
         }
         coeff=1/t;
@@ -265,9 +265,11 @@ public class Main {
             if(lastB!=down[i]){
                 index+=coeff*(last/n);
                 last=0;
+                coeff*=-1;
             }
             else last++;
             lastB=down[i];
+            coeff=coeff*(i+1)/i;
         }
         if(last==n-1) index+=coeff*(last/n);
         return index;
